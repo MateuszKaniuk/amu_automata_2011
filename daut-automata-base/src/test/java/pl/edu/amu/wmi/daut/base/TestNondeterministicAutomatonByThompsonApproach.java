@@ -7,6 +7,21 @@ import junit.framework.TestCase;
  */
 public class TestNondeterministicAutomatonByThompsonApproach extends TestCase {
 
+/**
+ * Automat reprezentujący liczby większe od 1337
+ */
+ 
+ public final void test1337() {
+     final AutomatonSpecification spec =new NaiveAutomatonSpecification();
+     
+     State q0a = spec.addState();
+     State q1a = spec.addState();
+     State q2a = spec.addState();
+     State q3a = spec.addState();
+     State q4a = spec.addState();
+     State q5a = spec.addState();
+     State q6a = spec.addState();_
+ }
     /**
      * Pierwszy test (przykładowy prosty automat).
      */
