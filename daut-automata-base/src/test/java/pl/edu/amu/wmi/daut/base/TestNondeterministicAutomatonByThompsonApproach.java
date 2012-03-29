@@ -6,22 +6,54 @@ import junit.framework.TestCase;
  * Test klasy NondeterministicAutomatonByThompsonApproach.
  */
 public class TestNondeterministicAutomatonByThompsonApproach extends TestCase {
-
-/**
- * Automat reprezentujący liczby większe od 1337
- */
  
- public final void test1337() {
-     final AutomatonSpecification spec =new NaiveAutomatonSpecification();
-     
-     State q0a = spec.addState();
-     State q1a = spec.addState();
-     State q2a = spec.addState();
-     State q3a = spec.addState();
-     State q4a = spec.addState();
-     State q5a = spec.addState();
-     State q6a = spec.addState();_
- }
+ 
+/**
+* Automat przyjmujący liczby większe od 1337.
+*/
+public final void testLeet() {
+
+final AutomatonSpecification spec = new NaiveAutomatonSpecification();
+
+State q0a = spec.addState();
+
+State q1a = spec.addState();
+State q2a = spec.addState();
+State q3a = spec.addState();
+
+State q1b = spec.addState();
+State q2b = spec.addState();
+State q3b = spec.addState();
+
+State q4 = spec.addState();
+
+spec.addTransition(q0a, q1b, new CharRangeTransitionLabel('2', '9'));
+spec.addTransition(q1b, q2b, new CharRangeTransitionLabel('0', '9'));
+spec.addTransition(q2b, q3b, new CharRangeTransitionLabel('0', '9'));
+spec.addTransition(q3b, q4, new CharRangeTransitionLabel('0', '9'));
+
+spec.addTransition(q0a, q1a, new CharTransitionLabel('1'));
+
+spec.addTransition(q1a, q1b, new CharRangeTransitionLabel('0', '2'));
+spec.addTransition(q1a, q2a, new CharRangeTransitionLabel('3', '9'));
+
+spec.addTransition(q2a, q2b, new CharRangeTransitionLabel('0', '2'));
+spec.addTransition(q2a, q3a, new CharRangeTransitionLabel('3', '9'));
+
+spec.addTransition(q3a, q3b, new CharRangeTransitionLabel('0', '7'));
+spec.addTransition(q3a, q4, new CharRangeTransitionLabel('8', '9'));
+
+spec.markAsInitial(q0a);
+spec.markAsFinal(q4);
+
+final NondeterministicAutomatonByThompsonApproach automaton =
+new NondeterministicAutomatonByThompsonApproach(spec);
+
+assertFalse(automaton.accepts("1337"));
+assertTrue(automaton.accepts("1338"));
+assertTrue(automaton.accepts("2345"));
+assertFalse(automaton.accepts("900"));
+} 
     /**
      * Pierwszy test (przykładowy prosty automat).
      */
